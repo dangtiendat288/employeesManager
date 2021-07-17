@@ -3,9 +3,10 @@ import {Button, Card, Input} from 'react-native-elements';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 // import {emailChanged} from '../actions';
-import RNPickerSelect from 'react-native-picker-select';
+
 import * as actions from '../actions';
-import Test from '../test';
+
+import Confirm from './common/Confirm';
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -54,9 +55,7 @@ class LoginForm extends Component {
 
   render() {
     console.log(this.props);
-    // if (this.props.user) {
-    //   this.props.navigation.navigate('employeeList');
-    // }
+
     return (
       <Card borderRadius={10}>
         <Input

@@ -4,10 +4,12 @@ import {Button, Card} from 'react-native-elements';
 import {connect} from 'react-redux';
 import * as actions from '../actions/EmployeeActions';
 import Communications from 'react-native-communications';
+import Confirm from './common/Confirm';
 
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
+  state = {showModal: false};
   componentDidMount() {
     _.each(this.props.route.params, (value, prop) => {
       this.props.employeeUpdate({prop, value});
@@ -31,6 +33,12 @@ class EmployeeEdit extends Component {
     Communications.text(phone, `Your upcoming shift is ${shift}`);
   }
 
+  onAccept() {}
+
+  onDecline() {
+    this.setState({showModal: false});
+  }
+
   render() {
     console.log(this.props);
     return (
@@ -48,6 +56,20 @@ class EmployeeEdit extends Component {
           title="Text Schedule"
           onPress={this.onTextPress.bind(this)}
         />
+        <Button
+          containerStyle={{margin: 5}}
+          title="Fire Employee"
+          onPress={() => {
+            this.setState({showModal: !this.state.showModal});
+          }}
+        />
+
+        <Confirm
+          visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}>
+          Are you sure you want to delete this?
+        </Confirm>
       </Card>
     );
   }
