@@ -33,7 +33,12 @@ class EmployeeEdit extends Component {
     Communications.text(phone, `Your upcoming shift is ${shift}`);
   }
 
-  onAccept() {}
+  onAccept() {
+    // console.log(this.props.route.params.uid);
+    const {uid} = this.props.route.params;
+    this.props.employeeDelete({uid});
+    this.props.navigation.pop();
+  }
 
   onDecline() {
     this.setState({showModal: false});
